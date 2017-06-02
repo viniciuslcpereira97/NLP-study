@@ -5,10 +5,9 @@ import random
 import nltk
 from nltk import NaiveBayesClassifier
 from nltk.corpus import names
-import matplotlib.pyplot as plt
 
-male_names = open("/home/diego/Downloads/Telegram Desktop/nomes_masculinos").read().split('\n')
-female_names = open("/home/diego/Downloads/Telegram Desktop/nomes_femininos").read().split('\n')
+male_names = open("./nomes_masculinos").read().split('\n')
+female_names = open("./nomes_femininos").read().split('\n')
 
 def gender_features(word):
     return {'last_letter': word[-1]}
@@ -20,12 +19,6 @@ features_sets = [( gender_features(name), gender ) for (name, gender) in labeled
 
 train_set, test_set = features_sets, features_sets[:500]
 
-print train_set[0]
-
 classifier = NaiveBayesClassifier.train( train_set )
 
 print classifier.classify( gender_features("vinicius") )
-
-plt.scatter(  )
-plt.show()
-# print nltk.classify.accuracy( classifier, test_set )
